@@ -1,17 +1,24 @@
 {
-    "content_security_policy" : "script-src 'self' https://unpkg.com/axios/dist/axios.min.js; object-src 'self'",
     "manifest_version" : 2,
     
-    
-
     "name" : "DSM Meal Extension",
-    "description" : "Print Hello, World! message",
-    "version" : "1.0.0",
+    "description" : "Chrome meal extension program for DSM students",
+    "version" : "1.0.1",
+    "author" : "Ethan Cho",
     
     "browser_action" : {
         "default_icon" : "icon.png",
         "default_popup" : "popup.html"
     },
+    
+    "icons" : {
+        "16" : "icon16.png",
+        "24" : "icon24.png",
+        "32" : "icon32.png",
+        "64" : "icon64.png",
+        "128" : "icon128.png"
+    },
+    
     "permissions" : [
         "tabs",
         "<all_urls>"
