@@ -1,0 +1,19 @@
+{
+    "content_security_policy" : "script-src 'self' https://unpkg.com/axios/dist/axios.min.js; object-src 'self'",
+    "manifest_version" : 2,
+    
+    
+
+    "name" : "DSM Meal Extension",
+    "description" : "Print Hello, World! message",
+    "version" : "1.0.0",
+    
+    "browser_action" : {
+        "default_icon" : "icon.png",
+        "default_popup" : "popup.html"
+    },
+    "permissions" : [
+        "tabs",
+        "<all_urls>"
+    ]
+}

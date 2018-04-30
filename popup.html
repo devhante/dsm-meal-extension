@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>DSM Meal Extension</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/font.css">
+        <link rel="stylesheet" type="text/css" href="css/popup.css">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/axios.min.js"></script>
+        <script src="js/popup.js"></script>
+    </head>
+    
+    <body>
+        
+        <header>
+            <!-- <img src="static/image/menu.png" alt="Menu Icon" id="icon-menu"> -->
+            DSM Meal Extension
+        </header>
+        
+        <div id="content">
+            <div id="content-header">
+                <img src="static/image/back.png" alt="Yesterday Button" id="button-yesterday">
+                <span id="date">로딩중...</span>
+                <img src="static/image/next.png" alt="Tomorrow Button" id="button-tomorrow">
+            </div>
+
+            <ul id="meal-wrap">
+                <li id="breakfast" class="meal">
+                    <div class="meal-title">아침식사</div>
+                    <ul class="menu-list">
+                        <!-- <li>
+                            <span class="text">시리얼(혼합)</span>
+                            <i class="far fa-heart heart" style="color: red;"></i>
+                            <span class="score">43</span>
+                        </li> -->
+
+                        <li>로딩중...</li>
+                    </ul>
+                </li>
+                <li id="lunch" class="meal">
+                    <div class="meal-title">점심식사</div>
+                    <ul class="menu-list"><li>로딩중...</li></ul>
+                </li>
+                <li id="dinner" class="meal">
+                    <div class="meal-title">저녁식사</div>
+                    <ul class="menu-list"><li>로딩중...</li></ul>
+                </li>
+            </ul>
+        </div>
+
+    </body>
+</html>
