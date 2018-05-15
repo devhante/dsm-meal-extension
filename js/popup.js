@@ -1,50 +1,59 @@
-let $date = null;
-let dateNow = null;
-let menu = null;
+// Variables
 
-$(document).ready(function() {
-    $date = $("#date");
-    dateNow = new Date();
-    loadMenu(dateNow);
+// dateNow: Date 객체. 출력되어 있는 날짜 정보를 담고 있음.
+// menu: dateNow의 메뉴 정보를 담고 있는 객체.
 
-    $("#button-yesterday").click(function() {
-        dateNow.setDate(dateNow.getDate() - 1);
-        loadMenu(dateNow);
-    });
+let meal = {date: new Date(), menu: new Object()};
 
-    $("#button-tomorrow").click(function() {
-        dateNow.setDate(dateNow.getDate() + 1);
-        loadMenu(dateNow);
-    });
-});
+console.log(chrome.storage);
 
-const myDate = {
-    getYear(dateObject) {
-        return dateObject.getYear() + 1900;
-    },
-    getMonth(dateObject) {
-        return dateObject.getMonth() + 1;
-    },
-    getDate(dateObject) {
-        return dateObject.getDate();
-    },
-    getDay(dateObject) {
-        let days = ['일', '월', '화', '수', '목', '금', '토'];
-        return days[dateObject.getDay()];
-    }
+updateMenu(true);
+
+document.getElementById("button-yesterday").addEventListener("click", onClickYesterday);
+document.getElementById("button-tomorrow").addEventListener("click", onClickTomorrow);
+document.getElementById("button-size").addEventListener("click", onClickSize);
+
+chrome.storage.local.set({size: 12});
+
+function onClickYesterday() {
+    meal.date.setDate(meal.date.getDate() - 1);
+    updateMenu(true);
 }
 
-function loadMenu(dateObject) {
-    let year = myDate.getYear(dateObject);
-    let month = myDate.getMonth(dateObject).toString().length == 1 ? "0" + myDate.getMonth(dateObject) : myDate.getMonth(dateObject);
-    let date = myDate.getDate(dateObject).toString().length == 1 ? "0" + myDate.getDate(dateObject) : myDate.getDate(dateObject);
+function onClickTomorrow() {
+    meal.date.setDate(meal.date.getDate() + 1);
+    updateMenu(true);
+}
 
-    let menuUrl = `http://dsm2015.cafe24.com/meal/${year}-${month}-${date}`;
+function onClickSize() {
+    chrome.storage.local.get("size", function(items) {
+        let newSize = 12;
+        switch(items.size) {
+            case 8: newSize = 12;
+            case 12: newSize = 16;
+            case 16: newSize = 8;
+        }
 
-    axios.get(menuUrl)
+        chrome.storage.local.set({size: newSize});
+        document.querySelector("*").style.fontSize = newSize;
+        document.getElementById("button-size").innerHTML = newSize + "px";
+    });
+}
+
+function updateMenu(print) {
+    let year = meal.date.getFullYear().toString();
+    let month = (meal.date.getMonth() + 1).toString();
+    let date = meal.date.getDate().toString();
+
+    month = month.length == 1 ? "0" + month : month;
+    date = date.length == 1 ? "0" + date : date;
+
+    let url = `http://dsm2015.cafe24.com/meal/${year}-${month}-${date}`;
+
+    axios.get(url)
     .then(response => {
-        menu = JSON.parse(JSON.stringify(response.data));
-        printMenu();
+        meal.menu = JSON.parse(JSON.stringify(response.data));
+        if(print == true) printMenu();
     })
     .catch(err => {
         console.log(err);
@@ -52,30 +61,29 @@ function loadMenu(dateObject) {
 }
 
 function printMenu() {
-    let month = myDate.getMonth(dateNow);
-    let date = myDate.getDate(dateNow);
-    let day = myDate.getDay(dateNow);
+    let month = (meal.date.getMonth() + 1).toString();
+    let date = meal.date.getDate().toString();
+    let day = ['일', '월', '화', '수', '목', '금', '토'][meal.date.getDay()];
 
-    let text = `${month}월 ${date}일 ${day}요일`;
-    $date.text(text);
+    document.getElementById("date").innerHTML = `${month}월 ${date}일 ${day}요일`;
 
-    let $breakfast = $("#breakfast .menu-list");
-    let $lunch = $("#lunch .menu-list");
-    let $dinner = $("#dinner .menu-list");
+    let breakfast = document.getElementById("breakfast").getElementsByClassName("menu-list")[0];
+    let lunch = document.getElementById("lunch").getElementsByClassName("menu-list")[0];
+    let dinner = document.getElementById("dinner").getElementsByClassName("menu-list")[0];
 
-    $breakfast.html("");
-    $lunch.html("");
-    $dinner.html("");
+    breakfast.innerHTML = "";
+    lunch.innerHTML = "";
+    dinner.innerHTML = "";
 
-    for (i of menu.breakfast) {
-        $breakfast.append('<li><span class="text">' + i + '</span></li>');
+    for (item of meal.menu.breakfast) {
+        breakfast.innerHTML += '<li><span class="text">' + item + '</span></li>';
     }
 
-    for (i of menu.lunch) {
-        $lunch.append('<li><span class="text">' + i + '</span></li>');
+    for (item of meal.menu.lunch) {
+        lunch.innerHTML += '<li><span class="text">' + item + '</span></li>';
     }
 
-    for (i of menu.dinner) {
-        $dinner.append('<li><span class="text">' + i + '</span></li>');
+    for (item of meal.menu.dinner) {
+        dinner.innerHTML += '<li><span class="text">' + item + '</span></li>';
     }
 }
