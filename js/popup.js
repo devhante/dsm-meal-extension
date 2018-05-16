@@ -4,16 +4,20 @@
 // menu: dateNow의 메뉴 정보를 담고 있는 객체.
 
 let meal = {date: new Date(), menu: new Object()};
-
-console.log(chrome.storage);
-
 updateMenu(true);
 
 document.getElementById("button-yesterday").addEventListener("click", onClickYesterday);
 document.getElementById("button-tomorrow").addEventListener("click", onClickTomorrow);
 document.getElementById("button-size").addEventListener("click", onClickSize);
 
-chrome.storage.local.set({size: 12});
+chrome.storage.local.get("size", function(items) {
+    let isInited = false;
+
+    if(items.size == undefined) chrome.storage.local.set({size: "12px"}, function() {
+        changeSize(newSize);
+    });
+    else changeSize(items.size);
+});
 
 function onClickYesterday() {
     meal.date.setDate(meal.date.getDate() - 1);
@@ -27,17 +31,22 @@ function onClickTomorrow() {
 
 function onClickSize() {
     chrome.storage.local.get("size", function(items) {
-        let newSize = 12;
+        let newSize = "12px";
         switch(items.size) {
-            case 8: newSize = 12;
-            case 12: newSize = 16;
-            case 16: newSize = 8;
+            case "8px": newSize = "12px"; break;
+            case "12px": newSize = "16px"; break;
+            case "16px": newSize = "8px"; break;
         }
 
         chrome.storage.local.set({size: newSize});
-        document.querySelector("*").style.fontSize = newSize;
-        document.getElementById("button-size").innerHTML = newSize + "px";
+        changeSize(newSize);
     });
+}
+
+function changeSize(size)
+{
+    document.getElementsByTagName("html")[0].style.fontSize = size;
+    document.getElementById("button-size").innerHTML = size;
 }
 
 function updateMenu(print) {
