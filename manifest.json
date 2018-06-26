@@ -7,16 +7,16 @@
     "author" : "Ethan Cho",
     
     "browser_action" : {
-        "default_icon" : "icon128.png",
-        "default_popup" : "popup.html"
+        "default_icon" : "static/icons/icon128.png",
+        "default_popup" : "html/popup.html"
     },
     
     "icons" : {
-        "16" : "icon16.png",
-        "24" : "icon24.png",
-        "32" : "icon32.png",
-        "64" : "icon64.png",
-        "128" : "icon128.png"
+        "16" : "static/icons/icon16.png",
+        "24" : "static/icons/icon24.png",
+        "32" : "static/icons/icon32.png",
+        "64" : "static/icons/icon64.png",
+        "128" : "static/icons/icon128.png"
     },
     
     "permissions" : [
