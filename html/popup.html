@@ -10,43 +10,44 @@
     </head>
     
     <body>
-        
-        <header>
-            <!-- <img src="../static/images/menu.png" alt="Menu Icon" id="icon-menu"> -->
-            <div id="title">DSM Meal Extension</div>
-            <span class="button" id="button-size">12px</span>
-        </header>
-        
-        <div id="content">
-            <div id="content-header">
-                <img src="../static/images/back.png" alt="Yesterday Button" class="button" id="button-yesterday">
-                <span id="date">로딩중...</span>
-                <img src="../static/images/next.png" alt="Tomorrow Button" class="button" id="button-tomorrow">
+        <mask>
+            <header>
+                <!-- <img src="../static/images/menu_white.png" alt="Menu Icon" id="icon-menu"> -->
+                <div id="title">DSM Meal Extension</div>
+                <span class="button" id="button-size">12px</span>
+            </header>
+            
+            <div id="content">
+                <div id="content-header">
+                    <img src="../static/images/back_white.png" alt="Yesterday Button" class="button" id="button-yesterday">
+                    <span id="date">로딩중...</span>
+                    <img src="../static/images/next_white.png" alt="Tomorrow Button" class="button" id="button-tomorrow">
+                </div>
+
+                <ul id="meal-wrap">
+                    <li id="breakfast" class="meal">
+                        <div class="meal-title">아침식사</div>
+                        <ul class="menu-list">
+                            <!-- <li>
+                                <span class="text">시리얼(혼합)</span>
+                                <i class="far fa-heart heart" style="color: red;"></i>
+                                <span class="score">43</span>
+                            </li> -->
+
+                            <li>로딩중...</li>
+                        </ul>
+                    </li>
+                    <li id="lunch" class="meal">
+                        <div class="meal-title">점심식사</div>
+                        <ul class="menu-list"><li>로딩중...</li></ul>
+                    </li>
+                    <li id="dinner" class="meal">
+                        <div class="meal-title">저녁식사</div>
+                        <ul class="menu-list"><li>로딩중...</li></ul>
+                    </li>
+                </ul>
             </div>
-
-            <ul id="meal-wrap">
-                <li id="breakfast" class="meal">
-                    <div class="meal-title">아침식사</div>
-                    <ul class="menu-list">
-                        <!-- <li>
-                            <span class="text">시리얼(혼합)</span>
-                            <i class="far fa-heart heart" style="color: red;"></i>
-                            <span class="score">43</span>
-                        </li> -->
-
-                        <li>로딩중...</li>
-                    </ul>
-                </li>
-                <li id="lunch" class="meal">
-                    <div class="meal-title">점심식사</div>
-                    <ul class="menu-list"><li>로딩중...</li></ul>
-                </li>
-                <li id="dinner" class="meal">
-                    <div class="meal-title">저녁식사</div>
-                    <ul class="menu-list"><li>로딩중...</li></ul>
-                </li>
-            </ul>
-        </div>
+        </mask>
 
         <script src="../js/popup.js"></script>
         <script src="../js/fontSize.js"></script>
