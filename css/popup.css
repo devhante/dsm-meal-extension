@@ -13,6 +13,7 @@ body {
     background-image: url(../static/images/salmon-blur-small.png);
     background-position-x: 4px;
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 mask {
